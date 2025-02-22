@@ -1,0 +1,43 @@
+.content-wrapper-create {
+    display: flex;
+    flex-direction: row; /* Выстраиваем элементы по горизонтали */
+    width: 1860px;
+    height: calc(100vh - 90px); /* Убираем пространство для фиксированного хедера */
+    padding: 30px;
+    margin: 10px;
+    margin-top: -90px;
+}
+
+/* Временно для отладки */
+/* * {
+    border: 1px solid red;
+
+} */
+.selection-panel {
+    display: flex;
+    flex-direction: column; /* Все элементы идут вертикально */
+    width: 400px;
+    height: 300px;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 30px;
+}
+
+.selection-group {
+    display: flex;
+    flex-direction: column; /* Элементы внутри группы идут вертикально */
+    margin-bottom: 15px; /* Отступ между группами */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}

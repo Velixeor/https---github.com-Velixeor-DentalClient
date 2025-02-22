@@ -1,0 +1,200 @@
+
+.content-wrapper {
+    display: flex;
+    flex-direction: row; /* Выстраиваем элементы по горизонтали */
+    width: 100%;
+    height: calc(100vh - 90px); /* Убираем пространство для фиксированного хедера */
+    padding: 0;
+    margin: 0;
+    margin-top: -90px; /* Задаем отступ сверху, равный высоте хедера */
+}
+  
+  /* Левая панель */
+.sidebar {
+    width: 15%;
+    background: white;
+    padding: 30px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 150px); /* Заполнение всей доступной высоты */
+    padding-right: 30px;
+}
+  
+  /* Основной контент */
+.main-content {
+   
+    padding: 20px;
+    overflow-y: auto;
+    flex-direction: column;
+    width: 80vw; /* Основной контент будет занимать 80% ширины */
+    margin: 0;
+        
+}
+
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+
+.button-container {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end; /* Прижимаем кнопку к правому краю */
+}
+
+
+/* Кнопка "Создать" */
+.create-button {
+    background: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: auto;
+}
+
+.create-button:hover {
+    background: #357abd;
+}
+
+/* Проекты */
+.projects-table {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.project-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Стиль текста */
+.loading-text {
+    color: #777;
+}
+
+.error-message {
+    color: red;
+}
+
+.no-projects {
+    color: #555;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-button {
+    background: #4a90e2;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 0 5px;
+}
+
+.pagination-button:hover {
+    background: #357abd;
+}
+
+.pagination-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+.projects-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.projects-list th, .projects-list td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.projects-list th {
+    background-color: #f4f4f4;
+}
+
+.projects-list td {
+    text-align: center;
+}
+
+.projects-list td:last-child {
+    text-align: right;
+}
+
+.projects-list tr:hover {
+    background-color: #f1f1f1;
+}
+
+.filter-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    margin-top: 15px;
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+/* Стили для каждой строки фильтра */
+.filter-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition:  0.2s ease-in-out;
+}
+
+/* Стили для чекбоксов */
+.filter-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #007bff; /* Синий цвет чекбокса */
+    cursor: pointer;
+}
+
+/* Текст фильтра */
+.filter-text {
+    color: #333;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Hover эффект */
+.filter-label:hover {
+    background: rgba(0, 123, 255, 0.1);
+}
+
+/* Стили для активного чекбокса */
+.filter-checkbox:checked + .filter-text {
+    color: #007bff;
+    font-weight: bold;
+}
