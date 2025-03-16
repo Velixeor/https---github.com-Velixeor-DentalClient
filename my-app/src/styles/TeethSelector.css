@@ -1,0 +1,51 @@
+.teeth-container {
+  width: 900px;
+  height: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрируем по горизонтали */
+  justify-content: center;
+  position: relative;
+  padding-top: 10px;
+  }
+  
+  .upper-teeth-container {
+    display: flex;
+    width: 120%;
+    height: 40%; /* Половина высоты контейнера */
+    /* transform: rotate(270deg);  */
+    position: relative;
+    box-sizing: border-box;
+    margin-top: -90px;
+  }
+  
+  .lower-teeth-container {
+    
+    display: flex;
+    justify-content: center;
+    width: 120%;
+    height: 40%; /* Половина высоты контейнера */
+    /* transform: rotate(90deg);  */
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: -90px;
+  }
+  
+  .tooth-button {
+    pointer-events: auto;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid blue;
+    font-size: 16px;
+    text-align: center;
+    line-height: 52px;
+    cursor: pointer;
+  }
+  
+  .tooth-button:hover {
+    background-color: lightblue;
+  }
+  

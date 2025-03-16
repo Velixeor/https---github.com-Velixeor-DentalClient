@@ -1,0 +1,124 @@
+/* styles/ToothDetails.css */
+.tooth-details-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.service-selection {
+  width: 33%;
+  background: white;
+  padding: 30px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 150px); /* Заполнение всей доступной высоты */
+  padding-right: 30px;
+  gap: 20px;
+}
+
+.main-content-detales {
+  width: 33%;
+  background: white;
+  padding: 30px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 150px); /* Заполнение всей доступной высоты */
+  padding-right: 30px;
+  gap: 20px;
+}
+
+.material-selection {
+  width: 90%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.option {
+  background: #6200ea;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.option:hover {
+  background: #3700b3;
+}
+
+.back-button {
+  margin-top: 20px;
+  background: #ff1744;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-button:hover {
+  background: #d50000;
+}
+.selected-parameters {
+  width: 33%;
+  background: white;
+  padding: 30px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 150px); /* Заполнение всей доступной высоты */
+  padding-right: 30px;
+  gap: 20px;
+}
+
+.selected-parameters h2 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.selected-parameters p {
+  font-size: 16px;
+  color: #333;
+  margin: 5px 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.save-button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.save-button:disabled {
+  background: #b0b0b0;
+  cursor: not-allowed;
+}
+
+.clear-button {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}

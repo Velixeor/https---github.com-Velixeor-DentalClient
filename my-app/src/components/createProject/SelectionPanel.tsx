@@ -1,40 +1,82 @@
-import React, { useState } from "react";
+import "../../styles/SelectionPanel.css";
+import { Pencil } from "lucide-react";
+import { useTeethContext } from "../../context/TeethContext";
+import { useCustomers } from "../../hooks/useCustomers";
+import { useTechnicians } from "../../hooks/useTechnicians";
 
 export function SelectionPanel() {
-    const [selectedCustomer, setSelectedCustomer] = useState("");
-    const [selectedTechnician, setSelectedTechnician] = useState("");
-    const [selectedUser, setSelectedUser] = useState("");
+  const { state, dispatch } = useTeethContext();
+  const { customers, loading: loadingCustomers } = useCustomers();
+  const { technicians, loading: loadingTechnicians } = useTechnicians();
 
-    return (
-        <div className="selection-panel">
-            <h3>Выберите действие из списка справа</h3>
-
-            <div className="selection-group">
-                <label>Заказчик:</label>
-                <select value={selectedCustomer} onChange={(e) => setSelectedCustomer(e.target.value)}>
-                    <option value="">Выберите...</option>
-                    <option value="customer1">Заказчик 1</option>
-                    <option value="customer2">Заказчик 2</option>
-                </select>
-            </div>
-
-            <div className="selection-group">
-                <label>Техник:</label>
-                <select value={selectedTechnician} onChange={(e) => setSelectedTechnician(e.target.value)}>
-                    <option value="">Выберите...</option>
-                    <option value="tech1">Техник 1</option>
-                    <option value="tech2">Техник 2</option>
-                </select>
-            </div>
-
-            <div className="selection-group">
-                <label>Пользователь:</label>
-                <select value={selectedUser} onChange={(e) => setSelectedUser(e.target.value)}>
-                    <option value="">Выберите...</option>
-                    <option value="user1">Пользователь 1</option>
-                    <option value="user2">Пользователь 2</option>
-                </select>
-            </div>
+  return (
+    <div className="selection-panel">
+      {/* Заказчик */}
+      <div className="selection-group">
+        <label><strong>Заказчик:</strong></label>
+        <div className="selection-controls">
+          <select
+            value={state.customerId?.toString() || ""}
+            onChange={(e) => {
+              const selectedCustomer = customers.find((c) => c.id.toString() === e.target.value);
+              if (selectedCustomer) {
+                dispatch({ type: "SET_CUSTOMER", customer: selectedCustomer.name });
+                dispatch({ type: "SET_CUSTOMER_ID", customerId: Number(selectedCustomer.id) });
+              }
+            }}
+            disabled={loadingCustomers}
+          >
+            <option value="">Пожалуйста, выберите</option>
+            {customers.map((customer) => (
+              <option key={customer.id} value={customer.id.toString()}>
+                {customer.name}
+              </option>
+            ))}
+          </select>
+          <button className="edit-btn"><Pencil size={16} /></button>
         </div>
-    );
+      </div>
+
+      {/* Пациент */}
+      <div className="selection-group">
+        <label><strong>Пациент:</strong></label>
+        <div className="selection-controls">
+          <input
+            type="text"
+            className="patient-input"
+            placeholder="Введите имя пациента..."
+            value={state.patient}
+            onChange={(e) => dispatch({ type: "SET_PATIENT", patient: e.target.value })}
+          />
+          <button className="edit-btn"><Pencil size={16} /></button>
+        </div>
+      </div>
+
+      {/* Техник */}
+      <div className="selection-group">
+        <label><strong>Техник:</strong></label>
+        <div className="selection-controls">
+          <select
+            value={state.technicianId?.toString() || ""}
+            onChange={(e) => {
+              const selectedTechnician = technicians.find((t) => t.id.toString() === e.target.value);
+              if (selectedTechnician) {
+                dispatch({ type: "SET_TECHNICIAN", technician: selectedTechnician.name });
+                dispatch({ type: "SET_TECHNICIAN_ID", technicianId: Number(selectedTechnician.id) });
+              }
+            }}
+            disabled={loadingTechnicians}
+          >
+            <option value="">Пожалуйста, выберите</option>
+            {technicians.map((technician) => (
+              <option key={technician.id} value={technician.id.toString()}>
+                {technician.name}
+              </option>
+            ))}
+          </select>
+          <button className="edit-btn"><Pencil size={16} /></button>
+        </div>
+      </div>
+    </div>
+  );
 }

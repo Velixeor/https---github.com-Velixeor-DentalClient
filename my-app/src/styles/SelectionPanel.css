@@ -1,0 +1,66 @@
+.selection-panel {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 500px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Контейнер для каждой группы */
+.selection-group {
+    display: flex;
+    flex-direction: column; /* Label сверху */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+}
+
+/* Контейнер для элементов в строке */
+.selection-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Стилизация Label */
+.selection-group label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Стилизация select и input */
+select, .id-input, .patient-input {
+    flex-grow: 1;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+/* Поле ID */
+.id-input {
+    width: 80px;
+    text-align: center;
+}
+
+/* Кнопка редактирования */
+.edit-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
