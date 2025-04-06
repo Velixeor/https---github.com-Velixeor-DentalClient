@@ -16,7 +16,7 @@ export function SelectionPanel() {
         <label><strong>Заказчик:</strong></label>
         <div className="selection-controls">
           <select
-            value={state.customerId?.toString() || ""}
+            value={state.customerId?.toString() || ""} // Если есть customerId в контексте, он будет выбран
             onChange={(e) => {
               const selectedCustomer = customers.find((c) => c.id.toString() === e.target.value);
               if (selectedCustomer) {
@@ -45,7 +45,7 @@ export function SelectionPanel() {
             type="text"
             className="patient-input"
             placeholder="Введите имя пациента..."
-            value={state.patient}
+            value={state.patient} // Используем значение пациента из контекста
             onChange={(e) => dispatch({ type: "SET_PATIENT", patient: e.target.value })}
           />
           <button className="edit-btn"><Pencil size={16} /></button>
@@ -57,7 +57,7 @@ export function SelectionPanel() {
         <label><strong>Техник:</strong></label>
         <div className="selection-controls">
           <select
-            value={state.technicianId?.toString() || ""}
+            value={state.technicianId?.toString() || ""} // Если есть technicianId в контексте, он будет выбран
             onChange={(e) => {
               const selectedTechnician = technicians.find((t) => t.id.toString() === e.target.value);
               if (selectedTechnician) {

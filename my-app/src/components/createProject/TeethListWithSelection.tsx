@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTeethContext } from "../../context/TeethContext";
 import { useCreateProject } from "../../hooks/useCreateProject"; // Импортируем хук
 import "../../styles/TeethListWithSelection.css";
@@ -7,11 +7,18 @@ export function TeethListWithSelection() {
   const { state, dispatch } = useTeethContext();
   const { createProject, loading } = useCreateProject(); // Используем хук
 
-  const [selectedTypeOfAntagonist, setSelectedTypeOfAntagonist] = useState(state.typeOfAntagonist);
-  const [selectedTeethColor, setSelectedTeethColor] = useState(state.teethColor);
+  // Инициализируем состояния с дефолтными значениями или значениями из контекста
+  const [selectedTypeOfAntagonist, setSelectedTypeOfAntagonist] = useState<string>(state.typeOfAntagonist || "A1");
+  const [selectedTeethColor, setSelectedTeethColor] = useState<string>(state.teethColor || "WHITE");
 
   const antagonistTypes = ["A1", "A2", "B1", "B2"];
   const teethColors = ["WHITE", "YELLOW", "GRAY"];
+
+  useEffect(() => {
+    // Обновляем состояние, если в контексте появляются новые значения
+    setSelectedTypeOfAntagonist(state.typeOfAntagonist || "A1");
+    setSelectedTeethColor(state.teethColor || "WHITE");
+  }, [state.typeOfAntagonist, state.teethColor]);  // Отслеживаем изменения в контексте
 
   const handleSave = () => {
     createProject(state);

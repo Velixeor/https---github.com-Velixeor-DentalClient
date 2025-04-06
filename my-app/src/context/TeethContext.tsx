@@ -12,7 +12,7 @@ export interface ToothState {
   customer: string;
   technician: string;
   patient: string;
-  comments: string[];
+  comment: string;
   typeOfAntagonist: string;
   status: string;
   teethColor: string;
@@ -28,7 +28,7 @@ const initialState: ToothState = {
   customer: "",
   technician: "",
   patient: "",
-  comments: [],
+  comment: "",
   typeOfAntagonist: "",
   status: "",
   teethColor: "",
@@ -52,7 +52,12 @@ type Action =
   | { type: "SET_CUSTOMER_ID"; customerId: number }
   | { type: "SET_TECHNICIAN_ID"; technicianId: number }
   | { type: "SET_COUPLINGS"; couplings: any[] }
-  | { type: "CLEAR_ALL" };
+  | { type: "CLEAR_ALL" }
+  | { type: "SET_TEETH"; teeth: Record<number, {
+    service: string | { name: string; serviceId: number };
+    material: string | { name: string; materialId: number };
+    servicePrice?: number;
+  }> };
 
 // Редьюсер для изменения состояния
 const reducer = (state: ToothState, action: Action): ToothState => {
@@ -76,7 +81,7 @@ const reducer = (state: ToothState, action: Action): ToothState => {
     case "SET_PATIENT":
       return { ...state, patient: action.patient };
     case "ADD_COMMENT":
-      return { ...state, comments: [...state.comments, action.comment] };
+      return { ...state, comment: action.comment };
     case "SET_TYPE_OF_ANTAGONIST":
       return { ...state, typeOfAntagonist: action.typeOfAntagonist };
     case "SET_STATUS":
@@ -91,6 +96,8 @@ const reducer = (state: ToothState, action: Action): ToothState => {
       return { ...state, technicianId: action.technicianId };
     case "SET_COUPLINGS":
       return { ...state, couplings: action.couplings };
+    case "SET_TEETH":
+      return { ...state, teeth: action.teeth };
     case "CLEAR_ALL":
       return initialState;
     default:
@@ -118,7 +125,7 @@ export const useTeethContext = () => {
 export const prepareProjectDTO = (state: ToothState) => {
   return {
     patient: state.patient,
-    comment: state.comments.join("; "),
+    comment: state.comment,
     typeOfAntagonist: state.typeOfAntagonist,
     status: "NEW",
     teethColor: state.teethColor,
