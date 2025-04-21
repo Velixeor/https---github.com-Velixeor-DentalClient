@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../../styles/ToothDetails.css";
 
+
 interface MaterialSelectionProps {
   onSelect: (material: { name: string; materialId: number }) => void;
 }
@@ -19,6 +20,7 @@ const materialMap: Record<string, number> = {
 
 export function MaterialSelection({ onSelect }: MaterialSelectionProps) {
   const [selectedMaterial, setSelectedMaterial] = useState<string | null>(null);
+
 
   const handleSelect = (material: string) => {
     setSelectedMaterial(material);

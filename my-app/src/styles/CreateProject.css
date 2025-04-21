@@ -17,7 +17,7 @@
     padding: 20px;
     overflow-y: auto;
     flex-direction: column;
-    width: 100%; /* Основной контент будет занимать 80% ширины */
+    width: 60%; /* Основной контент будет занимать 80% ширины */
     margin: 0;
         
 }

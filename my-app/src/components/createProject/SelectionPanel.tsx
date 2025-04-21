@@ -3,11 +3,17 @@ import { Pencil } from "lucide-react";
 import { useTeethContext } from "../../context/TeethContext";
 import { useCustomers } from "../../hooks/useCustomers";
 import { useTechnicians } from "../../hooks/useTechnicians";
+import { useState } from "react";
+import { CreateTechnicianModal } from "../../modal/CreateTechnicianModal";
+import { CreateCustomerModal } from "../../modal/CreateCustomerModal"; 
 
 export function SelectionPanel() {
+  const [showTechnicianModal, setShowTechnicianModal] = useState(false);
+  const [showCustomerModal, setShowCustomerModal] = useState(false); 
+
   const { state, dispatch } = useTeethContext();
-  const { customers, loading: loadingCustomers } = useCustomers();
-  const { technicians, loading: loadingTechnicians } = useTechnicians();
+  const { customers, loading: loadingCustomers, fetchCustomers } = useCustomers();  // fetchCustomers добавлен
+  const { technicians, loading: loadingTechnicians, fetchTechnicians } = useTechnicians();  // fetchTechnicians добавлен
 
   return (
     <div className="selection-panel">
@@ -16,7 +22,7 @@ export function SelectionPanel() {
         <label><strong>Заказчик:</strong></label>
         <div className="selection-controls">
           <select
-            value={state.customerId?.toString() || ""} // Если есть customerId в контексте, он будет выбран
+            value={state.customerId?.toString() || ""}
             onChange={(e) => {
               const selectedCustomer = customers.find((c) => c.id.toString() === e.target.value);
               if (selectedCustomer) {
@@ -33,7 +39,22 @@ export function SelectionPanel() {
               </option>
             ))}
           </select>
-          <button className="edit-btn"><Pencil size={16} /></button>
+
+          <button
+            className="edit-btn"
+            onClick={() => setShowCustomerModal(true)} // Вызов модалки
+          >
+            <Pencil size={16} />
+          </button>
+
+          {showCustomerModal && (
+            <CreateCustomerModal
+              onClose={() => {
+                setShowCustomerModal(false);  // Закрытие модалки
+                fetchCustomers();  // Перезагружаем данные заказчиков после закрытия модалки
+              }}
+            />
+          )}
         </div>
       </div>
 
@@ -45,7 +66,7 @@ export function SelectionPanel() {
             type="text"
             className="patient-input"
             placeholder="Введите имя пациента..."
-            value={state.patient} // Используем значение пациента из контекста
+            value={state.patient}
             onChange={(e) => dispatch({ type: "SET_PATIENT", patient: e.target.value })}
           />
           <button className="edit-btn"><Pencil size={16} /></button>
@@ -57,7 +78,7 @@ export function SelectionPanel() {
         <label><strong>Техник:</strong></label>
         <div className="selection-controls">
           <select
-            value={state.technicianId?.toString() || ""} // Если есть technicianId в контексте, он будет выбран
+            value={state.technicianId?.toString() || ""}
             onChange={(e) => {
               const selectedTechnician = technicians.find((t) => t.id.toString() === e.target.value);
               if (selectedTechnician) {
@@ -74,7 +95,22 @@ export function SelectionPanel() {
               </option>
             ))}
           </select>
-          <button className="edit-btn"><Pencil size={16} /></button>
+
+          <button
+            className="edit-btn"
+            onClick={() => setShowTechnicianModal(true)} // Вызов модалки
+          >
+            <Pencil size={16} />
+          </button>
+
+          {showTechnicianModal && (
+            <CreateTechnicianModal
+              onClose={() => {
+                setShowTechnicianModal(false);  // Закрытие модалки
+                fetchTechnicians();  // Перезагружаем данные техников после закрытия модалки
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

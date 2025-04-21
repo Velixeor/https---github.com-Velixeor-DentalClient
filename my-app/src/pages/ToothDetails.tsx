@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTeethContext } from "../context/TeethContext";
 import { ServiceSelection } from "../components/toothDetails/ServiceSelection";
 import { MaterialSelection } from "../components/toothDetails/MaterialSelection";
+import { useNavigate } from "react-router-dom";
 import "../styles/ToothDetails.css";
 
 export function ToothDetails() {
@@ -17,7 +18,7 @@ export function ToothDetails() {
 
   // Локальное состояние для цены
   const [price, setPrice] = useState(savedPrice);
-
+  const navigate = useNavigate();
   // Функция сохранения выбранных параметров
   const handleSave = () => {
     if (selectedService && selectedMaterial && price) {
@@ -31,6 +32,7 @@ export function ToothDetails() {
         servicePrice: Number(price), // Добавляем цену
       });
       alert(`Сохранено: ${typeof selectedService === "string" ? selectedService : selectedService?.name} + ${selectedMaterial} за ${price} руб.`);
+      navigate("/create");
     } else {
       alert("Выберите услугу, материал и укажите цену");
     }
@@ -38,14 +40,8 @@ export function ToothDetails() {
 
   // Функция очистки выбора
   const handleClear = () => {
-    setPrice(""); // Очищаем цену
-    dispatch({ 
-      type: "SET_TOOTH_DATA", 
-      toothId, 
-      service: { name: "", serviceId: 0 }, 
-      material: "", 
-      servicePrice: undefined, // Сбрасываем цену
-    });
+    dispatch({ type: "DELETE_TOOTH", toothId }); // Удаляем зуб из контекста
+    navigate("/create"); // Навигация как и раньше
   };
 
   return (

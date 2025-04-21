@@ -10,24 +10,27 @@ export function useTechnicians() {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        async function fetchTechnicians() {
-            try {
-                const response = await fetch("http://localhost:8081/api/v1/technician"); 
-                if (!response.ok) {
-                    throw new Error("Ошибка загрузки техников");
-                }
-                const data: Technician[] = await response.json();
-                setTechnicians(data);
-            } catch (err) {
-                setError((err as Error).message);
-            } finally {
-                setLoading(false);
+    // Функция для подгрузки данных техников
+    const fetchTechnicians = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch("http://localhost:8081/api/v1/technician");
+            if (!response.ok) {
+                throw new Error("Ошибка загрузки техников");
             }
+            const data: Technician[] = await response.json();
+            setTechnicians(data);
+        } catch (err) {
+            setError((err as Error).message);
+        } finally {
+            setLoading(false);
         }
+    };
 
+    // Загружаем данные при монтировании компонента
+    useEffect(() => {
         fetchTechnicians();
     }, []);
 
-    return { technicians, loading, error };
+    return { technicians, loading, error, fetchTechnicians };  // Возвращаем fetchTechnicians
 }
