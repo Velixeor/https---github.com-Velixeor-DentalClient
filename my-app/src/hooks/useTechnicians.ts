@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 interface Technician {
     id: string;
@@ -14,7 +15,7 @@ export function useTechnicians() {
     const fetchTechnicians = async () => {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:8081/api/v1/technician");
+            const response = await fetchWithAuth("http://localhost:8080/api/v1/project/technician");
             if (!response.ok) {
                 throw new Error("Ошибка загрузки техников");
             }

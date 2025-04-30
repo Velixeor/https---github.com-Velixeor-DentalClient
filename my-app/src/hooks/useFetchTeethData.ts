@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ToothState } from "../context/TeethContext";  // Импортируй тип состояния
 import { useTeethContext } from "../context/TeethContext";  // Импортируем хук для контекста
+import { fetchWithAuth } from "./fetchWithAuth";
 
 // Хук для загрузки данных из API и обновления контекста
 const useFetchTeethData = (projectId: number) => {
@@ -15,7 +16,7 @@ const useFetchTeethData = (projectId: number) => {
         setError(null);
 
         // Запрос по projectId
-        const response = await fetch(`http://localhost:8081/api/v1/project/${projectId}`);
+        const response = await fetchWithAuth(`http://localhost:8080/api/v1/project/${projectId}`);
 
         if (!response.ok) {
           throw new Error(`Ошибка: ${response.status}`);

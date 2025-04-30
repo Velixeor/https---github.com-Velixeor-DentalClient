@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../styles/CreateTechnicianModal.css";
+import { fetchWithAuth } from "../hooks/fetchWithAuth";
 
 type Skill = {
   id: number;
@@ -19,7 +20,7 @@ export function CreateTechnicianModal({ onClose }: Props) {
   const [skillPrices, setSkillPrices] = useState<Record<number, number>>({}); // Состояние для хранения цен скиллов
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/v1/skills")
+    fetchWithAuth("http://localhost:8080/api/v1/project/skills")
       .then((res) => res.json())
       .then((data: Skill[]) => setSkills(data));
   }, []);
@@ -40,7 +41,7 @@ export function CreateTechnicianModal({ onClose }: Props) {
   };
 
   const handleSave = async () => {
-    await fetch("http://localhost:8081/api/v1/technician/create", {
+    await fetchWithAuth("http://localhost:8080/api/v1/project/technician/create", {
       method: "POST",
       body: JSON.stringify({
         name,

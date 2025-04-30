@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/CreateCustomerModal.css"; // подключение стилей для модалки
+import { fetchWithAuth } from "../hooks/fetchWithAuth";
 
 export function CreateCustomerModal({ onClose }: { onClose: () => void }) {
   const [name, setName] = useState("");
@@ -9,7 +10,7 @@ export function CreateCustomerModal({ onClose }: { onClose: () => void }) {
   const navigate = useNavigate();
 
   const handleSave = async () => {
-    await fetch("http://localhost:8081/api/v1/customer/create", {
+    await fetchWithAuth("http://localhost:8080/api/v1/project/customer/create", {
       method: "POST",
       body: JSON.stringify({ name, phone, address }),
       headers: { "Content-Type": "application/json" },

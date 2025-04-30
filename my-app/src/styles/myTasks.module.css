@@ -1,0 +1,62 @@
+.mytasks-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mytasks-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.mytasks-card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mytasks-submitted {
+  background-color: #e6ffe6;
+}
+
+.mytasks-awaiting {
+  color: #777;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.mytasks-textarea {
+  width: 98%;
+  height: 80px;
+  margin: 16px 0;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.mytasks-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.mytasks-buttonDisabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}

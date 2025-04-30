@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Project } from "../types";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 export function useSearchProjects(searchQuery: string, filters: string[]) {
     const [searchResults, setSearchResults] = useState<Project[]>([]);
@@ -16,9 +17,9 @@ export function useSearchProjects(searchQuery: string, filters: string[]) {
 
         setLoading(true);
         const filterParams = filters.map(f => `filter=${f}`).join("&");
-        const url = `http://localhost:8081/api/v1/project/search?query=${encodeURIComponent(searchQuery)}&${filterParams}`;
+        const url = `http://localhost:8080/api/v1/project/search?query=${encodeURIComponent(searchQuery)}&${filterParams}`;
 
-        fetch(url)
+        fetchWithAuth(url)
             .then((res) => {
                 if (!res.ok) throw new Error("Ошибка поиска");
                 return res.json();

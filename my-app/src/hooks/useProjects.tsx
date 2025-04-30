@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Project } from "../types"; // Твой тип данных
+import { fetchWithAuth } from "./fetchWithAuth";
 
 export const useProjects = (page: number) => {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -10,7 +11,7 @@ export const useProjects = (page: number) => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://localhost:8081/api/v1/project?page=${page}&size=10`)
+        fetchWithAuth(`http://localhost:8080/api/v1/project?page=${page}&size=10`)
             .then((res) => {
                 if (!res.ok) throw new Error("Ошибка загрузки данных");
                 return res.json();

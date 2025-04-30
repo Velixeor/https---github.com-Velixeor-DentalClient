@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { ToothState, prepareProjectDTO } from "../context/TeethContext";
-
-const API_URL = "http://localhost:8081/api/v1/project/create";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 export const useCreateProject = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError]   = useState<string | null>(null);
 
   const createProject = async (state: ToothState) => {
     setLoading(true);
@@ -14,11 +13,10 @@ export const useCreateProject = () => {
     const projectData = prepareProjectDTO(state);
 
     try {
-      const response = await fetch(API_URL, {
+      // Передаём относительный URL — он автоматически допишется к API_BASE
+      const response = await fetchWithAuth("http://localhost:8080/api/v1/project/create", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(projectData),
       });
 
@@ -29,7 +27,6 @@ export const useCreateProject = () => {
       const result = await response.json();
       console.log("Проект успешно создан:", result);
       alert("Проект успешно сохранён!");
-
     } catch (err: any) {
       console.error("Ошибка при создании проекта:", err);
       setError(err.message);
