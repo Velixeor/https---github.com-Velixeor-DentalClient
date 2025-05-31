@@ -33,6 +33,17 @@
   margin-top: 10px;
 }
 
+.mytasks-button-reject {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+
 .mytasks-textarea {
   width: 98%;
   height: 80px;

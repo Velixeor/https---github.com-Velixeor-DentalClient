@@ -8,11 +8,10 @@ const LoginPage = () => {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const [userCode, setUserCode] = useState("");
-  const [companyCode, setCompanyCode] = useState("");
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Проверяем, если пользователь уже авторизован, то перенаправляем сразу на /projects
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/projects");
@@ -24,11 +23,11 @@ const LoginPage = () => {
       const response = await fetch("http://localhost:8080/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userCode, companyCode }),
+        body: JSON.stringify({ mail, password }),
       });
 
       if (!response.ok) {
-        throw new Error("Неверный код пользователя или лицензия");
+        throw new Error("Неверный mail или пароль");
       }
 
       const data = await response.json();
@@ -47,16 +46,16 @@ const LoginPage = () => {
       <h2 className={styles.loginTitle}>Авторизация</h2>
       <input
         type="text"
-        placeholder="Код сотрудника"
-        value={userCode}
-        onChange={(e) => setUserCode(e.target.value)}
+        placeholder="Mail"
+        value={mail}
+        onChange={(e) => setMail(e.target.value)}
         className={styles.loginInput}
       />
       <input
-        type="text"
-        placeholder="Лицензионный ключ (код компании)"
-        value={companyCode}
-        onChange={(e) => setCompanyCode(e.target.value)}
+        type="password"
+        placeholder="Пароль"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         className={styles.loginInput}
       />
       <button onClick={handleLogin} className={styles.loginButton}>

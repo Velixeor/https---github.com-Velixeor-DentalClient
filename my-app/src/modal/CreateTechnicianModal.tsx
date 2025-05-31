@@ -5,7 +5,7 @@ import { fetchWithAuth } from "../hooks/fetchWithAuth";
 type Skill = {
   id: number;
   name: string;
-  price?: number; // Добавляем цену скила
+  price?: number;
 };
 
 type Props = {
@@ -14,10 +14,12 @@ type Props = {
 
 export function CreateTechnicianModal({ onClose }: Props) {
   const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");        
+  const [password, setPassword] = useState<string>("");   
   const [isOlder, setIsOlder] = useState<boolean>(false);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<number[]>([]);
-  const [skillPrices, setSkillPrices] = useState<Record<number, number>>({}); // Состояние для хранения цен скиллов
+  const [skillPrices, setSkillPrices] = useState<Record<number, number>>({});
 
   useEffect(() => {
     fetchWithAuth("http://localhost:8080/api/v1/project/skills")
@@ -36,7 +38,7 @@ export function CreateTechnicianModal({ onClose }: Props) {
   const handlePriceChange = (skillId: number, price: number) => {
     setSkillPrices((prev) => ({
       ...prev,
-      [skillId]: price, // Обновляем цену скилла
+      [skillId]: price,
     }));
   };
 
@@ -46,9 +48,11 @@ export function CreateTechnicianModal({ onClose }: Props) {
       body: JSON.stringify({
         name,
         isOlder,
+        email,
+        password,
         skills: selectedSkills.map((skillId) => ({
           skillId,
-          payment: skillPrices[skillId] || 0, // Используем цену для скилла
+          payment: skillPrices[skillId] || 0,
         })),
       }),
       headers: { "Content-Type": "application/json" },
@@ -67,6 +71,22 @@ export function CreateTechnicianModal({ onClose }: Props) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Имя"
+        />
+
+        <input
+          className="ctm-input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          type="email"
+        />
+
+        <input
+          className="ctm-input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Пароль"
+          type="password"
         />
 
         <label className="ctm-label">
