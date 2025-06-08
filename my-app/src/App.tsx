@@ -6,6 +6,7 @@ import { Projects } from "./pages/Projects";
 import { MyTasks } from "./pages/MyTasks";
 import { TasksForApproval } from "./pages/PendingApproval";
 import { CreateProject } from "./pages/CreateProject";
+import  RegisterPage  from "./pages/RegisterPage";
 import { ToothDetails } from "./pages/ToothDetails";
 import { Prostheses } from "./pages/Prostheses";
 import { TeethProvider } from "./context/TeethContext";
@@ -15,14 +16,14 @@ import LoginPage from "./pages/LoginPage";
 
 function App() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
+  const hideHeader = ["/login", "/register"].includes(location.pathname);
 
   return (
     <TeethProvider>
       <AuthProvider>
         <div className="wrapper">
           {/* Только если не на странице логина, показываем хедер */}
-          {!isLoginPage && (
+          {!hideHeader && (
             <header className="header">
               <div className="header-content">
                 <div className="logo-container">
@@ -60,6 +61,7 @@ function App() {
 
   {/* Временно убрали PrivateRoute для тестов */}
   <Route path="/projects" element={<Projects />} />
+  <Route path="/register" element={<RegisterPage />} />
   <Route path="/tasks" element={<MyTasks />} />
   <Route path="/pending" element={<TasksForApproval />} />
   <Route path="/create" element={<CreateProject />} />

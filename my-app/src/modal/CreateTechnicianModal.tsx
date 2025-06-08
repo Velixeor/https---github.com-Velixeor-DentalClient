@@ -14,7 +14,7 @@ type Props = {
 
 export function CreateTechnicianModal({ onClose }: Props) {
   const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");        
+  const [email, setMail] = useState<string>("");        
   const [password, setPassword] = useState<string>("");   
   const [isOlder, setIsOlder] = useState<boolean>(false);
   const [skills, setSkills] = useState<Skill[]>([]);
@@ -48,7 +48,7 @@ export function CreateTechnicianModal({ onClose }: Props) {
       body: JSON.stringify({
         name,
         isOlder,
-        email,
+        mail: email,
         password,
         skills: selectedSkills.map((skillId) => ({
           skillId,
@@ -76,7 +76,7 @@ export function CreateTechnicianModal({ onClose }: Props) {
         <input
           className="ctm-input"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setMail(e.target.value)}
           placeholder="Email"
           type="email"
         />

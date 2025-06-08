@@ -20,7 +20,7 @@ interface PatternStage {
   id: number;
   executionStepNumber: number;
   baseStage: BaseStage;
-  isNew?: boolean; // <--- чтобы отличать новые задачи
+  isNew?: boolean;
 }
 
 interface PatternStageDTO {
@@ -107,6 +107,17 @@ export function ModalProsthesisTemplate({ service, onClose }: Props) {
     setSelectedBaseStageId(null);
   };
 
+  const handleRemoveTask = (id: number) => {
+    setTasks(prev =>
+      prev
+        .filter(task => task.id !== id)
+        .map((task, index) => ({
+          ...task,
+          executionStepNumber: index + 1,
+        }))
+    );
+  };
+
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return;
 
@@ -123,31 +134,31 @@ export function ModalProsthesisTemplate({ service, onClose }: Props) {
   };
 
   const handleSaveOrder = async () => {
-  try {
-    const payload = tasks.map((task, index) => ({
-      id: task.isNew ? null : task.id, // null для новых
-      baseStageId: task.baseStage.id,
-      baseStageName: task.baseStage.name,
-      typeServiceId: service.id,
-      executionStepNumber: index + 1,
-    }));
+    try {
+      const payload = tasks.map((task, index) => ({
+        id: task.isNew ? null : task.id,
+        baseStageId: task.baseStage.id,
+        baseStageName: task.baseStage.name,
+        typeServiceId: service.id,
+        executionStepNumber: index + 1,
+      }));
 
-    const response = await fetchWithAuth(`${BASE_URL}/pattern-stage/order`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }, logout);
+      const response = await fetchWithAuth(`${BASE_URL}/pattern-stage/order`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }, logout);
 
-    if (!response.ok) {
-      throw new Error("Ошибка при сохранении порядка этапов");
+      if (!response.ok) {
+        throw new Error("Ошибка при сохранении порядка этапов");
+      }
+
+      alert("Порядок успешно сохранён");
+    } catch (err) {
+      console.error("Ошибка при сохранении порядка:", err);
+      alert("Произошла ошибка при сохранении порядка");
     }
-
-    alert("Порядок успешно сохранён");
-  } catch (err) {
-    console.error("Ошибка при сохранении порядка:", err);
-    alert("Произошла ошибка при сохранении порядка");
-  }
-};
+  };
 
   return (
     <div className="ctm-backdrop">
@@ -174,11 +185,30 @@ export function ModalProsthesisTemplate({ service, onClose }: Props) {
                               marginBottom: "4px",
                               backgroundColor: "#f1f1f1",
                               borderRadius: "4px",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
                               ...provided.draggableProps.style,
                             }}
                           >
-                            {task.executionStepNumber}. {task.baseStage.name}
-                            {task.baseStage.comment && ` — ${task.baseStage.comment}`}
+                            <span>
+                              {task.executionStepNumber}. {task.baseStage.name}
+                              {task.baseStage.comment && ` — ${task.baseStage.comment}`}
+                            </span>
+                            <button
+                              onClick={() => handleRemoveTask(task.id)}
+                              style={{
+                                marginLeft: "8px",
+                                background: "none",
+                                border: "none",
+                                cursor: "pointer",
+                                color: "red",
+                                fontWeight: "bold",
+                              }}
+                              title="Удалить задачу"
+                            >
+                              ❌
+                            </button>
                           </li>
                         )}
                       </Draggable>

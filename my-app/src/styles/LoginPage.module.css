@@ -49,4 +49,18 @@
     color: red;
     margin-top: 1rem;
   }
-  
+.switchText {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.switchLink {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.switchLink:hover {
+  text-decoration: none;
+}  

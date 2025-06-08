@@ -12,12 +12,13 @@ export function TeethListWithSelection() {
   const [selectedTeethColor, setSelectedTeethColor] = useState<string>(state.teethColor || "WHITE");
 
   const antagonistTypes = ["A1", "A2", "B1", "B2"];
-  const teethColors = ["WHITE", "YELLOW", "GRAY"];
+  const teethColors = ["A1", "A2", "A3", "A35", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D2", "D3", "D4"];
+
 
   useEffect(() => {
     // Обновляем состояние, если в контексте появляются новые значения
     setSelectedTypeOfAntagonist(state.typeOfAntagonist || "A1");
-    setSelectedTeethColor(state.teethColor || "WHITE");
+    setSelectedTeethColor(state.teethColor || "A1");
   }, [state.typeOfAntagonist, state.teethColor]);  // Отслеживаем изменения в контексте
 
   const handleSave = () => {

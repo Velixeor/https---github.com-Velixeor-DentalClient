@@ -62,6 +62,12 @@ const LoginPage = () => {
         Войти
       </button>
       {error && <p className={styles.loginError}>{error}</p>}
+        <p className={styles.switchText}>
+            Нет аккаунта?{" "}
+         <span onClick={() => navigate("/register")} className={styles.switchLink}>
+          Зарегистрироваться
+        </span>
+        </p>
     </div>
   );
 };

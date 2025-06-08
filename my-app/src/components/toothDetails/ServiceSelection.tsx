@@ -9,9 +9,9 @@ const serviceMap: Record<string, number> = {
     "Анатомическая коронка": 1,
     "Копинговая коронка": 2,
     "Прессованная коронка": 3,
-    "Анатомический мост": 4,
-    "Редуцированный мост": 5,
-    "Прессованный мост": 6,
+    "Вкладка/накладка": 4,
+    "Офсетная вкладка": 5,
+    "Винир": 6,
 };
 
 export function ServiceSelection({ onSelect }: ServiceSelectionProps) {
@@ -48,7 +48,7 @@ export function ServiceSelection({ onSelect }: ServiceSelectionProps) {
             <div className="service-category">
                 <h3>Протезы</h3>
                 <div className="options">
-                    {["Анатомический мост", "Редуцированный мост", "Прессованный мост"].map((service) => (
+                    {["Вкладка/накладка", "Офсетная вкладка ", "Винир"].map((service) => (
                         <button
                             key={service}
                             className={`option ${selectedService === service? "selected" : ""}`}
